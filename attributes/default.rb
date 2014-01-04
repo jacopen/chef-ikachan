@@ -1,0 +1,7 @@
+default[:ikachan][:user] = "vagrant"
+default[:ikachan][:group]  = "vagrant"
+default[:ikachan][:install_dir]  = "/srv/ikachan"
+default[:ikachan][:irc_server]  = "chat.freenode.net"
+default[:ikachan][:irc_user]  = "ikachan"
+default[:ikachan][:irc_nick]  = "ikachan"
+default[:ikachan][:pl_version] = "5.18.0"

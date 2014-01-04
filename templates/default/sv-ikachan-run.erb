@@ -1,0 +1,12 @@
+<% options = ["-S #{node[:ikachan][:irc_server]}", "-U #{node[:ikachan][:irc_user]}", "-N #{node[:ikachan][:irc_nick]}"] %>
+<% options << "-P #{node[:ikachan][:irc_port]}" if node[:ikachan][:irc_port] %>
+<% options << "-p #{node[:ikachan][:port]}" if node[:ikachan][:port] %>
+<% options << "-K #{node[:ikachan][:irc_password]}" if node[:ikachan][:irc_password] %>
+<% options << "-o #{node[:ikachan][:bind_addr]}" if node[:ikachan][:bind_addr] %>
+#!/bin/sh
+
+export PATH=/home/<%= node[:ikachan][:user] %>/.plenv/bin:/home/<%= node[:ikachan][:user] %>/.plenv/shims:$PATH
+eval "$(plenv init -)"
+cd <%= node[:ikachan][:install_dir] %>
+exec 2>&1
+exec chpst -u <%= node[:ikachan][:user] %> -U <%= node[:ikachan][:user] %> carton exec -- ikachan <%= options.join(" ")  %>
