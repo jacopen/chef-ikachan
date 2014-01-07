@@ -9,6 +9,18 @@ plenv_install node[:ikachan][:pl_version] do
   action :install
 end
 
+plenv_global node[:ikachan][:pl_version] do
+  user   username
+  action :run
+end
+
+plenv_cpanm "Carton" do
+    user    username
+    version node[:ikachan][:pl_version]
+    options "--force"
+    action  :install
+end
+
 directory "#{node[:ikachan][:install_dir]}" do
   mode  0755
   action :create
